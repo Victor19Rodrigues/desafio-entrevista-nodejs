@@ -1,11 +1,10 @@
-import { IsInt, IsNotEmpty, Length } from 'class-validator';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 export class CreateCompanyDto {
   @IsNotEmpty()
   name: string;
 
   @IsNotEmpty()
-  @Length(14)
   cnpj: string;
 
   @IsNotEmpty()
