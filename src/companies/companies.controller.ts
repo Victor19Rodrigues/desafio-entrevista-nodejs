@@ -13,7 +13,7 @@ export class CompaniesController {
   }
 
   @Post()
-  createCompany(@Body() createCompanyDto: CreateCompanyDto): Company {
-    return this.companiesService.createCompany(createCompanyDto);
+  createCompany(@Body() companyData: CreateCompanyDto): Company {
+    return this.companiesService.createCompany(companyData);
   }
 }
