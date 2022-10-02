@@ -11,6 +11,10 @@ export class CompaniesService {
     return this.companies;
   }
 
+  getCompanyById(id: string): Company {
+    return this.companies.find((company) => company.id === id);
+  }
+
   createCompany(companyData: CreateCompanyDto): Company {
     const {
       name,

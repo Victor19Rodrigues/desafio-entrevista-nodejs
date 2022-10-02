@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Company } from './companies.model';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
@@ -10,6 +10,11 @@ export class CompaniesController {
   @Get()
   getAllCompanies(): Company[] {
     return this.companiesService.getAllCompanies();
+  }
+
+  @Get('/:id')
+  getCompanyById(@Param('id') id: string): Company {
+    return this.companiesService.getCompanyById(id);
   }
 
   @Post()
