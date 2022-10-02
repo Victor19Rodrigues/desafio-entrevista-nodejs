@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
+import { Vehicle } from './vehicle.model';
 import { VehiclesService } from './vehicles.service';
 
 @Controller('vehicles')
@@ -16,17 +17,17 @@ export class VehiclesController {
   constructor(private readonly vehiclesService: VehiclesService) {}
 
   @Post()
-  createVehicle(@Body() vehicleData: CreateVehicleDto) {
+  createVehicle(@Body() vehicleData: CreateVehicleDto): Vehicle {
     return this.vehiclesService.createVehicle(vehicleData);
   }
 
   @Get()
-  getAllVehicles() {
+  getAllVehicles(): Vehicle[] {
     return this.vehiclesService.getAllVehicles();
   }
 
   @Get(':id')
-  getVehicleById(@Param('id') id: string) {
+  getVehicleById(@Param('id') id: string): Vehicle {
     return this.vehiclesService.getVehicleById(id);
   }
 
@@ -34,12 +35,12 @@ export class VehiclesController {
   updateVehicle(
     @Param('id') id: string,
     @Body() vehicleData: UpdateVehicleDto,
-  ) {
+  ): Vehicle {
     return this.vehiclesService.updateVehicle(id, vehicleData);
   }
 
   @Delete(':id')
-  deleteVehicle(@Param('id') id: string) {
+  deleteVehicle(@Param('id') id: string): void {
     return this.vehiclesService.deleteVehicle(id);
   }
 }

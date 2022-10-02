@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
-import { Vehicle } from './vehicles.model';
+import { Vehicle } from './vehicle.model';
 import { v4 as uuid } from 'uuid';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 
