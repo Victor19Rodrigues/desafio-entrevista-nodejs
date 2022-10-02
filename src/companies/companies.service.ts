@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Company } from './companies.model';
 import { v4 as uuid } from 'uuid';
 import { CreateCompanyDto } from './dto/create-company.dto';
+import { UpdateCompanyDto } from './dto/update-company.dto';
 
 @Injectable()
 export class CompaniesService {
@@ -44,5 +45,13 @@ export class CompaniesService {
 
   deleteCompany(id: string): void {
     this.companies = this.companies.filter((company) => company.id !== id);
+  }
+
+  updateCompany(id: string, companyData: UpdateCompanyDto): Company {
+    const company = this.getCompanyById(id);
+
+    Object.assign(company, companyData);
+
+    return company;
   }
 }

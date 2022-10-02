@@ -1,7 +1,16 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { Company } from './companies.model';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
+import { UpdateCompanyDto } from './dto/update-company.dto';
 
 @Controller('companies')
 export class CompaniesController {
@@ -12,7 +21,7 @@ export class CompaniesController {
     return this.companiesService.getAllCompanies();
   }
 
-  @Get('/:id')
+  @Get(':id')
   getCompanyById(@Param('id') id: string): Company {
     return this.companiesService.getCompanyById(id);
   }
@@ -22,8 +31,16 @@ export class CompaniesController {
     return this.companiesService.createCompany(companyData);
   }
 
-  @Delete('/:id')
+  @Delete(':id')
   deleteCompany(@Param('id') id: string): void {
     return this.companiesService.deleteCompany(id);
+  }
+
+  @Put(':id')
+  updateCompany(
+    @Param('id') id: string,
+    @Body() companyData: UpdateCompanyDto,
+  ): Company {
+    return this.companiesService.updateCompany(id, companyData);
   }
 }
