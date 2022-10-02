@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Company } from './companies.model';
 import { v4 as uuid } from 'uuid';
 import { CreateCompanyDto } from './dto/create-company.dto';
@@ -13,7 +13,13 @@ export class CompaniesService {
   }
 
   getCompanyById(id: string): Company {
-    return this.companies.find((company) => company.id === id);
+    const company = this.companies.find((company) => company.id === id);
+
+    if (!company) {
+      throw new NotFoundException(`Company with ID "${id}" not found`);
+    }
+
+    return company;
   }
 
   createCompany(companyData: CreateCompanyDto): Company {
@@ -44,7 +50,11 @@ export class CompaniesService {
   }
 
   deleteCompany(id: string): void {
-    this.companies = this.companies.filter((company) => company.id !== id);
+    const companyFounded = this.getCompanyById(id);
+
+    this.companies = this.companies.filter(
+      (company) => company.id !== companyFounded.id,
+    );
   }
 
   updateCompany(id: string, companyData: UpdateCompanyDto): Company {
