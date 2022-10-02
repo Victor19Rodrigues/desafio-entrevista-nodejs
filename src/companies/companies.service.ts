@@ -41,4 +41,8 @@ export class CompaniesService {
 
     return company;
   }
+
+  deleteCompany(id: string): void {
+    this.companies = this.companies.filter((company) => company.id !== id);
+  }
 }
