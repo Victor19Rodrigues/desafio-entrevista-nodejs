@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Company } from './companies.model';
+import { v4 as uuid } from 'uuid';
+import { CreateCompanyDto } from './dto/create-company.dto';
 
 @Injectable()
 export class CompaniesService {
@@ -7,5 +9,32 @@ export class CompaniesService {
 
   getAllCompanies(): Company[] {
     return this.companies;
+  }
+
+  createCompany(companyData: CreateCompanyDto): Company {
+    const {
+      name,
+      cnpj,
+      address,
+      phone,
+      qtdSpotsForCars,
+      qtdSpotsForMotorcycles,
+    } = companyData;
+
+    const company: Company = {
+      id: uuid(),
+      name,
+      cnpj,
+      address,
+      phone,
+      qtdSpotsForCars,
+      qtdSpotsForMotorcycles,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    this.companies.push(company);
+
+    return company;
   }
 }
