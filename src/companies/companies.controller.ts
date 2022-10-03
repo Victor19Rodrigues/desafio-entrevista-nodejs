@@ -6,13 +6,16 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CompaniesService } from './companies.service';
 import { Company } from './company.entity';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 
 @Controller('companies')
+@UseGuards(AuthGuard())
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
 
