@@ -16,31 +16,31 @@ import { UpdateCompanyDto } from './dto/update-company.dto';
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
 
-  // @Get()
-  // getAllCompanies(): Company[] {
-  //   return this.companiesService.getAllCompanies();
-  // }
+  @Get()
+  getAllCompanies(): Promise<Company[]> {
+    return this.companiesService.getAllCompanies();
+  }
 
   @Get(':id')
-  async getCompanyById(@Param('id') id: string): Promise<Company> {
-    return await this.companiesService.getCompanyById(id);
+  getCompanyById(@Param('id') id: string): Promise<Company> {
+    return this.companiesService.getCompanyById(id);
   }
 
   @Post()
-  async createCompany(@Body() companyData: CreateCompanyDto): Promise<Company> {
-    return await this.companiesService.createCompany(companyData);
+  createCompany(@Body() companyData: CreateCompanyDto): Promise<Company> {
+    return this.companiesService.createCompany(companyData);
   }
 
-  // @Delete(':id')
-  // deleteCompany(@Param('id') id: string): void {
-  //   return this.companiesService.deleteCompany(id);
-  // }
+  @Delete(':id')
+  deleteCompany(@Param('id') id: string): Promise<void> {
+    return this.companiesService.deleteCompany(id);
+  }
 
-  // @Put(':id')
-  // updateCompany(
-  //   @Param('id') id: string,
-  //   @Body() companyData: UpdateCompanyDto,
-  // ): Company {
-  //   return this.companiesService.updateCompany(id, companyData);
-  // }
+  @Put(':id')
+  updateCompany(
+    @Param('id') id: string,
+    @Body() companyData: UpdateCompanyDto,
+  ): Promise<Company> {
+    return this.companiesService.updateCompany(id, companyData);
+  }
 }
