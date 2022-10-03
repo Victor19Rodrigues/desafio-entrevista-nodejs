@@ -5,7 +5,7 @@ import { CreateVehicleDto } from './dto/create-vehicle.dto';
 
 @Injectable()
 export class VehiclesRepository extends Repository<Vehicle> {
-  constructor(private dataSource: DataSource) {
+  constructor(private readonly dataSource: DataSource) {
     super(Vehicle, dataSource.createEntityManager());
   }
 

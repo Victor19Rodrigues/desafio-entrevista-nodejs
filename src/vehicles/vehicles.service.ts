@@ -6,7 +6,7 @@ import { VehiclesRepository } from './vehicles.repository';
 
 @Injectable()
 export class VehiclesService {
-  constructor(private vehiclesRepository: VehiclesRepository) {}
+  constructor(private readonly vehiclesRepository: VehiclesRepository) {}
 
   createVehicle(vehicleData: CreateVehicleDto): Promise<Vehicle> {
     return this.vehiclesRepository.createVehicle(vehicleData);

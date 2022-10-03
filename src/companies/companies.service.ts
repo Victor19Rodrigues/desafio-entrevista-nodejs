@@ -6,7 +6,7 @@ import { UpdateCompanyDto } from './dto/update-company.dto';
 
 @Injectable()
 export class CompaniesService {
-  constructor(private companiesRepository: CompaniesRepository) {}
+  constructor(private readonly companiesRepository: CompaniesRepository) {}
 
   async getAllCompanies(): Promise<Company[]> {
     return await this.companiesRepository.find();

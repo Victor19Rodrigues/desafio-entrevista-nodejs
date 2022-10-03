@@ -5,7 +5,7 @@ import { CreateCompanyDto } from './dto/create-company.dto';
 
 @Injectable()
 export class CompaniesRepository extends Repository<Company> {
-  constructor(private dataSource: DataSource) {
+  constructor(private readonly dataSource: DataSource) {
     super(Company, dataSource.createEntityManager());
   }
 
