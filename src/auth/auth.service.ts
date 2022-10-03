@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { SignInCredentialsDto } from './dto/signin-credentials.dto';
 import { JwtPayload } from './jwt-payload.interface';
 import { UsersRepository } from './users.repository';
 
@@ -17,14 +18,14 @@ export class AuthService {
   }
 
   async signIn(
-    authCredentialsData: AuthCredentialsDto,
+    signInCredentialsData: SignInCredentialsDto,
   ): Promise<{ accessToken: string }> {
-    const { username, password } = authCredentialsData;
+    const { email, password } = signInCredentialsData;
 
-    const user = await this.usersRepository.findOneBy({ username });
+    const user = await this.usersRepository.findOneBy({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      const payload: JwtPayload = { username };
+      const payload: JwtPayload = { email };
 
       const accessToken: string = this.jwtService.sign(payload);
 
